@@ -2,18 +2,20 @@ import os
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://est:newpassword@localhost/blog'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class DevelopmentConfig(Config):
+  
+    SECRET_KEY = os.environ.get('SECRET_KEY') or '8c44b407c2896a289a57817228ca8ed1'
     DEBUG = True
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 't0ps3cr3t'
 
 class TestingConfig(Config):
     TESTING = True
-    class ProductionConfig(Config):
-        pass
+    pass
+    
 class ProductionConfig(Config):
-    class ProductionConfig(Config):
-        pass
+    pass
 
 config = {
     'development': DevelopmentConfig,

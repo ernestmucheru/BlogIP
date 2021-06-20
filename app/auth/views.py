@@ -4,7 +4,8 @@ from .forms import RegistrationForm,LoginForm
 from . import auth
 from .. import db
 
-@auth.route('/register', methods=['GET','POST'])
+
+@auth.route('/register', methods=["GET","POST"])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
@@ -12,8 +13,8 @@ def register():
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('auth.login'))
-        title = "Sign Up"
-    return render_template('auth/register.html', registration_form = form)
+    title = "Sign Up"
+    return render_template('auth/register.html', form = form)
 
 @auth.route('/login')
 def login():
