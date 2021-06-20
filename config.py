@@ -12,7 +12,6 @@ class TestingConfig(Config):
     class ProductionConfig(Config):
         pass
 class ProductionConfig(Config):
-    TESTING = True
     class ProductionConfig(Config):
         pass
 
