@@ -1,10 +1,13 @@
-from flask import render_template
+from flask import render_template,url_for
 from . import main
+from ..models import posts
+
+
 
 @main.route('/')
-def index():
-    return render_template('index.html')
+def home():
+    return render_template('home.html', posts = posts)
 
-@main.route('/user/<username>')
-def user(username):
-    return render_template('user.html', username=username)
+@main.route('/about')
+def about():
+    return render_template('about.html', title = 'About')
