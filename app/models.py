@@ -7,22 +7,8 @@ from . import login_manager
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
-posts = [
-    {
-        'author': 'Manada Butate',
-        'title': 'New Blog',
-        'content': 'Mambo Vipi',
-        'date_posted': 'April 12, 2021'
-        
-    },
-    {
-        'author': 'Tika Ingoha',
-        'title': 'Trending Blod',
-        'content': 'Haba na Haba',
-        'date_posted': 'April 21, 2021'
-        
-    }
-]
+
+
 
 class User(db.Model,UserMixin):
     id = db.Column(db.Integer, primary_key=True)
