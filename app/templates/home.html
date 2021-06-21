@@ -5,7 +5,7 @@
         <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
         <div class="media-body">
             <div class="article-metadata">
-                <a href="{{ url_for('auth.account')}}" class="mr-2">{{ post.author.username }}</a>
+                <a href="{{ url_for('auth.post', post_id = post.id)}}" class="mr-2">{{ post.author.username }}</a>
                 <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
             </div>
             <h2><a href="{{ url_for('auth.post', post_id = post.id)}}" class="article-title" >{{ post.title }}</a></h2>
