@@ -1,5 +1,4 @@
 from random import random
-
 import secrets
 import os
 from flask import render_template,redirect,url_for,request,flash
@@ -9,7 +8,19 @@ from . import auth
 from .. import db
 from flask_login import login_user,login_required,logout_user,current_user
 from PIL import Image
+from flask_login import login_required
 
+
+
+@auth.route("/")
+@auth.route("/home")
+def home():
+    posts = Post.query.all()
+    return render_template('home.html', posts=posts)
+
+@auth.route('/about')
+def about():
+    return render_template('about.html', title = 'About')
 
 @auth.route('/register', methods=["GET","POST"])
 def register():
@@ -25,14 +36,14 @@ def register():
 @auth.route('/login',methods=['GET','POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+        return redirect(url_for('auth.home'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email = form.email.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user,form.remember.data)
             next_page = request.args.get('next')
-            return redirect(request.args.get('next') or url_for('main.home'))
+            return redirect(request.args.get('next') or url_for('auth.home'))
         else:
             flash('Invalid username or Password','danger')
 
@@ -43,7 +54,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for("main.home"))
+    return redirect(url_for("auth.home"))
 
 def save_picture(form_picture):
     random_hex = secrets.token_hex(8)
@@ -57,6 +68,7 @@ def save_picture(form_picture):
     i.save(picture_path)
 
     return picture_fn
+
 
 
 @auth.route("/account", methods=['GET', 'POST'])
@@ -87,7 +99,7 @@ def new_post():
         db.session.add(post)
         db.session.commit()
         flash('Your Post has been created!', 'success')
-        return redirect(url_for('main.home'))
+        return redirect(url_for('auth.home'))
     
     return render_template('create_post.html' , title='New Post',form=form)
 
