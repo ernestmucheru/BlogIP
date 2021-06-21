@@ -1,7 +1,7 @@
 from random import random
 import secrets
 import os
-from flask import render_template,redirect,url_for,request,flash
+from flask import render_template,redirect,url_for,request,flash,abort
 from ..models import User,Post
 from .forms import RegistrationForm,LoginForm,UpdateAccountForm,PostForm
 from . import auth
@@ -101,9 +101,25 @@ def new_post():
         flash('Your Post has been created!', 'success')
         return redirect(url_for('auth.home'))
     
-    return render_template('create_post.html' , title='New Post',form=form)
+    return render_template('create_post.html' , title='New Post', form=form,  legend ='Update Post')
 
 @auth.route("/post/<int:post_id>")
 def post(post_id):
     post = Post.query.get_or_404(post_id)
     return render_template('post.html', title=post.title, post=post)
+
+@auth.route("/post/<int:post_id>/update")
+@login_required
+def update_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    form = PostForm()
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.content = form.content.data
+        db.session.commit()
+        flash('Your post has been updated!', 'success')
+    form.title.data = post.title
+    form.content.data = post .content
+    return render_template('create_post.html', title='Update Post', legend ='Update Post', form=form)
