@@ -1,9 +1,9 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, PasswordField,BooleanField,SubmitField
+from wtforms import StringField, PasswordField,BooleanField,SubmitField,TextAreaField
 from wtforms import validators
-from wtforms.validators import Required, Email,EqualTo
+from wtforms.validators import DataRequired, Required, Email,EqualTo
 from ..models import User
 from wtforms import ValidationError
 
@@ -46,3 +46,8 @@ class UpdateAccountForm(FlaskForm):
                 user= User.query.filter_by(username = username.data).first()
                 if user:
                     raise ValidationError('Username is not available')
+
+class PostForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    content = TextAreaField('Content', validators=[DataRequired()])
+    submit = SubmitField('Post')
