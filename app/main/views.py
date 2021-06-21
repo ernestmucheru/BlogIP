@@ -1,4 +1,4 @@
-from flask import render_template,url_for
+from flask import render_template,url_for,flash,redirect,request
 from . import main
 from flask_login import login_required
 
@@ -30,3 +30,4 @@ def home():
 @main.route('/about')
 def about():
     return render_template('about.html', title = 'About')
+

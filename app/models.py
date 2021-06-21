@@ -42,3 +42,4 @@ class Post(db.Model,UserMixin):
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
+

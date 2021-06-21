@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_login import current_user
 from wtforms import StringField, PasswordField,BooleanField,SubmitField
 from wtforms.validators import Required, Email,EqualTo
 from ..models import User
@@ -25,3 +26,20 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password',validators=[Required()])
     remember = BooleanField('Remember me')
     submit = SubmitField('Sign In')
+
+class UpdateAccountForm(FlaskForm):
+    email = StringField('Your Email Address', validators=[Required(),Email()])
+    username = StringField('Enter your username',validators = [Required()])
+    submit = SubmitField('Update Profile')
+
+    def validate_email(self,email):
+        if email.data != current_user.email:
+
+            user= User.query.filter_by(email = email.data).first()
+            if user:
+                raise ValidationError('Email already exists')
+
+    def validate_username(self,username):
+                user= User.query.filter_by(username = username.data).first()
+                if user:
+                    raise ValidationError('Username is not available')
