@@ -2,8 +2,8 @@ from random import random
 import secrets
 import os
 from flask import render_template,redirect,url_for,request,flash,abort
-from ..models import User,Post
-from .forms import RegistrationForm,LoginForm,UpdateAccountForm,PostForm
+from ..models import User,Post,Comment
+from .forms import RegistrationForm,LoginForm,UpdateAccountForm,PostForm,CommentForm
 from . import auth
 from .. import db
 from flask_login import login_user,login_required,logout_user,current_user
@@ -146,3 +146,19 @@ def user_posts(username):
     posts = Post.query.filter_by(author=user)\
             .order_by(Post.date_posted.desc())
     return render_template('user_posts.html', posts=posts, user=user)
+
+@auth.route('/comment',methods=['GET', 'POST'])
+def comment():
+    # post = Post.query.get_or_404(post_id)
+    # content = Comment.query.get_or_404(post_id)
+    form = CommentForm()
+    if form.validate_on_submit():
+        content = form.content.data
+        form.content.data = ""
+        new_comment = Comment(content=content, user_id=current_user.id, post_id=post.id)
+        db.session.add(new_comment)
+        db.session.commit()
+        # return redirect(url_for('auth.home'))
+        return redirect(url_for(".comment", id=post.id))
+
+    return render_template('comments.html',title='New Comment',form=form , legend ='Add Comment')
