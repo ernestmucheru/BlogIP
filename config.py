@@ -13,7 +13,6 @@ class Config:
 
 class DevelopmentConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://est:newpassword@localhost/blogger'
-    SECRET_KEY = os.environ.get('SECRET_KEY')
     DEBUG = True
 
 class TestingConfig(Config):
