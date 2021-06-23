@@ -1,8 +1,12 @@
 {% extends "layout.html" %}    
 {% block content %}
-    
-    <h1>Yoooh</h1>
-    
+<div class="row">
+    <h1 class="text-center" style="font-size: 24pt; color:rgb(0, 0, 0); font-weight:700;">BLOG APP</h1>
+    <div class="container">
+        <span style="font-size:13pt"><i></i> <em>{{quote.quote}}</em> <i></i></span>
+        <p style="font-size:14pt">{{quote.author}}</p>
+    </div>
+</div>
 {% endblock %}
 
     

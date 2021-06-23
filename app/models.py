@@ -1,4 +1,4 @@
-from . import main,db
+from . import db
 from datetime import datetime
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
@@ -44,8 +44,13 @@ class Post(db.Model,UserMixin):
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
 
-class Comment(db.Model):
+class Comment(db.Model,UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'), nullable=False)
+    
+class Quote:
+    def __init__(self, author, quote):
+        self.author = author
+        self.quote = quote
