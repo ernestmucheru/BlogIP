@@ -1,10 +1,10 @@
 {% extends "layout.html" %}    
 {% block content %}
-<div class="row">
-    <h1 class="text-center" style="font-size: 24pt; color:rgb(0, 0, 0); font-weight:700;">BLOG APP</h1>
+<div class="row" id="quotes">
+    <h1 class=" qtitle text-center" style="font-size: 24pt; color:rgb(0, 0, 0); font-weight:700;">BLOG APP</h1>
     <div class="container">
-        <span style="font-size:13pt"><i></i> <em>{{quote.quote}}</em> <i></i></span>
-        <p style="font-size:14pt">{{quote.author}}</p>
+        <span style="font-size:13pt"><i></i> <strong>{{quote.quote}}</strong> <i></i></span>
+        <p class="qauthor" style="font-size:14pt"><em>{{quote.author}}</em></p>
     </div>
 </div>
 {% endblock %}
