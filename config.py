@@ -1,13 +1,19 @@
 import os
-
+    
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     BASE_URL='http://quotes.stormconsultancy.co.uk/random.json'
+        #email configurations
+    MAIL_SERVER = 'smtp.googlemail.com'
+    MAIL_PORT = 587
+    MAIL_USE_TLS = True
+    MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
+    MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
 
 class DevelopmentConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://est:newpassword@localhost/blogger'
-    SECRET_KEY = os.environ.get('SECRET_KEY') or '8c44b407c2896a289a57817228ca8ed1'
+    SECRET_KEY = os.environ.get('SECRET_KEY')
     DEBUG = True
 
 class TestingConfig(Config):
