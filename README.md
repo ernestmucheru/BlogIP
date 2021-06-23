@@ -23,6 +23,10 @@ This  is a flask application that allows writers to post blogs, edit and delite 
 
 ## Screenshots
 
+![Screenshot from 2021-06-22 17-24-36](https://user-images.githubusercontent.com/81610268/123112496-69a2ac80-d446-11eb-8270-e1ac17070208.png)
+![Screenshot from 2021-06-22 17-25-14](https://user-images.githubusercontent.com/81610268/123112510-6c9d9d00-d446-11eb-958e-a74cd8cb4f1c.png)
+![Screenshot from 2021-06-22 17-25-42](https://user-images.githubusercontent.com/81610268/123112516-6efff700-d446-11eb-9921-b5762a4db24c.png)
+![Screenshot from 2021-06-22 17-26-57](https://user-images.githubusercontent.com/81610268/123112529-71fae780-d446-11eb-8812-7de045505470.png)
 
 
 ## User Story
