@@ -1,0 +1,3 @@
+Collecting gunicorn
+  Using cached gunicorn-20.1.0-py3-none-any.whl (79 kB)
+Requirement already satisfied: pip in ./virtual/lib/python3.8/site-packages (21.1.2)
