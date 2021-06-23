@@ -1,6 +1,6 @@
 Hello {{user.username}},
 
-Welcome to Watchlist
+Welcome to Flask Blog
 We have just seen you have signed up for our application and want to welcome you to the family. 
 
 Please enjoy the blog page, post comment and update your account profile.
